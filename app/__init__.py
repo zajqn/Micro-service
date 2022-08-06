@@ -1,27 +1,21 @@
-import os
-from flask import Flask
-from .config import config_by_name
-from .api import api
-from .admin import admin
+from flask import Flask, request
+from flask_mongoengine import MongoEngine
+from app.api import api
+from app.admin import admin
 
 def create_app():
-  app = Flask(__name__, instance_relative_config=True)
-
-  if os.environ.get('FLASK_ENV') == "dev":
-    print("Enviroment: {}".format("dev"))
-    app.config.from_object(config_by_name["dev"])
-  elif os.environ.get('FLASK_ENV') == "test":
-    print("Enviroment: {}".format("test"))
-    app.config.from_object(config_by_name["test"])
-  else:
-    print("Enviroment: {}".format("prod"))
-    app.config.from_object(config_by_name["prod"])
+  app = Flask(__name__)
+  app.config.from_pyfile('config.cfg')
 
   app.register_blueprint(api.api_blueprint)
   app.register_blueprint(admin.admin_blueprint)
 
+  db = MongoEngine(app)
+
   @app.errorhandler(404)
   def handle_bad_request(e):
+    if request.path.startswith('/api/'):
+      return {'msg':'API Not found'}, 404
     return {'msg':'Not found'}, 404
   
   @app.errorhandler(405)
@@ -35,6 +29,5 @@ def create_app():
   @app.errorhandler(Exception)
   def handle_unknow_error(e):
     return {'msg':'Unknown Error'}, 520
-
 
   return app

@@ -3,3 +3,7 @@ MONGODB_SETTINGS = {
   'host':'localhost',
   'port': 27017
 }
+
+MONGODB_SETTINGS = {
+  'host':'mongodb+srv://fsoftqai:FgEjuWSLuC15LnUn@cluster0.ym5mb.mongodb.net/ai4security',
+}

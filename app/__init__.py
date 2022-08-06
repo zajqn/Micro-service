@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask_mongoengine import MongoEngine
+
 from app.api import api
 from app.admin import admin
 
@@ -7,8 +8,8 @@ def create_app():
   app = Flask(__name__)
   app.config.from_pyfile('config.cfg')
 
-  app.register_blueprint(api.api_blueprint) # URL : /api
-  app.register_blueprint(admin.admin_blueprint) # URL : /admin
+  app.register_blueprint(api.api_blueprint)
+  app.register_blueprint(admin.admin_blueprint)
 
   db = MongoEngine(app)
 

@@ -1,19 +1,25 @@
+from unittest import result
 from flask import request
-from ..model import users, movies
+from ..service.user_service import Users_Service
 
 class IndexController():
   def get_index():
-    for user in users.Users.objects():
-      print('user.username', user.username)
-
-    for movie in movies.Movies.objects():
-      print('movie.title', movie.title)
-
+    
+    result = Users_Service.get_user()
     return {"msg":"API Index OK"}
 
   def get_about():
-
     if request.method == "POST":
+      username = "TuanLA"
+      age = 35
+      Users_Service.add_user(username, age)
       return {"msg":"API ABOUT POST OK"}
 
+    if request.method == "DELETE":
+      username = "TuanLA"
+      Users_Service.delte_user_by_username(username)
+      return {"msg":"API ABOUT DELETE OK"}
+
     return {"msg":"API ABOUT GET OK"}
+  
+  

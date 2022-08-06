@@ -1,9 +1,6 @@
 conda create -n ai4security python=3.10
-
 conda activate ai4security
-
 pip install flask -e .
-
 pip install -r requirements.txt
 
 Start with PORT xxx

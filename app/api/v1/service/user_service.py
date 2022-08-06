@@ -14,3 +14,9 @@ class Users_Service():
     if username:
       users.Users.objects(username = username).first().delete()
     return {"msg":"Delete user by username OK"}
+
+  def update_username(oldusername, username):
+    if username:
+      user = users.Users.objects(username = oldusername)
+      user.update(username = username)
+    return {"msg":"Update user by username OK"}

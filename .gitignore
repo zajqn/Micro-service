@@ -1,3 +1,5 @@
 .egg-info/
 .egg/
+Fsoft.egg-info
+Fsoft.egg-info/
 __pycache__/

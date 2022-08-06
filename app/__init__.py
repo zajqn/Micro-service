@@ -7,8 +7,8 @@ def create_app():
   app = Flask(__name__)
   app.config.from_pyfile('config.cfg')
 
-  app.register_blueprint(api.api_blueprint)
-  app.register_blueprint(admin.admin_blueprint)
+  app.register_blueprint(api.api_blueprint) # URL : /api
+  app.register_blueprint(admin.admin_blueprint) # URL : /admin
 
   db = MongoEngine(app)
 

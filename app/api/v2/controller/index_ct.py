@@ -1,12 +1,12 @@
+from flask import request
 from flask_restful import Resource
-
 
 class IndexController(Resource):
   def get(self):
-    return {'msg':'get admin index'}
+    return {'msg':'get v2 index'}
 
   def post(self):
-    return {'msg':'post admin index'}
+    return {'msg':'post v2 index'}
   
   def put(self):
-    return {'msg':'put admin index'}
+    return {'msg':'put v2 index'}
